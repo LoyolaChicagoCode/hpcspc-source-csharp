@@ -1,0 +1,616 @@
+<project name="c#-jhpc" default="all" basedir=".">
+  <description> HP C# port of HPJPC </description>
+  
+  <property name="basedir" value="."/>
+
+  <!-- names the C# compiler to use, default to mono -->
+  <property name="csharp" value="gmcs"/>
+
+  <!-- place to drop compiled library components -->
+  <property name="dist" value="dist"/>
+
+  <!-- root of C# source -->
+  <property name="sharpath" value="src/info/jhpc"/>
+  
+  <!-- All build products are written to ${dist} -->
+
+  <target name="all" depends="thread,c4,c5,c6,c7,c8,c9"/>
+
+  <target name="dist">
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="clean" description="delete all compiled binaries">
+    <delete>
+      <fileset basedir="${dist}">
+	<include name="**/*.exe"/>
+	<include name="**/*.dll"/>
+      </fileset>
+    </delete>
+  </target>
+  
+
+  <!-- The core HPJPC Threads Library -->
+
+  <target name="thread" depends="dist">
+    <csc target="library" output="${dist}/thread.dll">
+      <sources>
+        <include name="src/**/thread/*.cs"/>
+      </sources>
+    </csc>
+  </target>
+
+  
+  <!-- Chapter 4 Examples -->
+
+  <target name="c4a" depends="thread">
+    <csc target="exe" output="${dist}/ProCon3.exe">
+      <sources>
+        <include name="src/**/textbook/**/ProCon3.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4b" depends="thread">
+    <csc target="exe" output="${dist}/ProCon4.exe">
+      <sources>
+        <include name="src/**/textbook/**/ProCon4.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4c" depends="thread">
+    <csc target="exe" output="${dist}/TestSimpleFuture.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSimpleFuture.cs"/>
+        <include name="src/**/textbook/**/SimpleFuture.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4d" depends="thread">
+    <csc target="exe" output="${dist}/TestSTOQ1.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSTOQ1.cs"/>
+        <include name="src/**/textbook/**/SharedTableOfQueues.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4e" depends="thread">
+    <csc target="exe" output="${dist}/TestSTOQ2.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSTOQ2.cs"/>
+        <include name="src/**/textbook/**/SharedTableOfQueues.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4f" depends="thread">
+    <csc target="exe" output="${dist}/TestSTOQ3.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSTOQ3.cs"/>
+        <include name="src/**/textbook/**/SharedTableOfQueues.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c4g" depends="thread">
+    <csc target="exe" output="${dist}/TestSTOQ4.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSTOQ4.cs"/>
+        <include name="src/**/textbook/**/SharedTableOfQueues.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4h" depends="thread">
+    <csc target="exe" output="${dist}/TestSTOQ5.exe">
+      <sources>
+        <include name="src/**/textbook/**/TestSTOQ5.cs"/>
+        <include name="src/**/textbook/**/SharedTableOfQueues.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c4" depends="c4a,c4b,c4c,c4d,c4e,c4f,c4g,c4h"/>
+
+  <!-- Chapter 5 Examples -->
+
+  <target name="c5a" depends="thread">
+    <csc target="exe" output="${dist}/IntegTrap3.exe">
+      <sources>
+        <include name="src/**/textbook/chapter05/integration/accumulator/*.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c5b" depends="thread">
+    <csc target="exe" output="${dist}/IntegTrap1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter05/integration/threads/*.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  
+  <target name="c5" depends="c5a,c5b"/>
+  
+  <!-- Chapter 6 Examples -->
+
+
+  <target name="c6a">
+    <csc target="exe" output="${dist}/LCS.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/LCS.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+ 
+  <target name="c6b">
+    <csc target="exe" output="${dist}/ShellsortBarrierTest1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/ShellsortBarrier.cs"/>
+        <include name="src/**/textbook/chapter06/**/ShellsortBarrierTest1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c6c">
+    <csc target="exe" output="${dist}/ShellsortBarrierTestTime1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/ShellsortBarrier.cs"/>
+        <include name="src/**/textbook/chapter06/**/ShellsortBarrierTestTime1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c6d">
+    <csc target="exe" output="${dist}/Warshall1Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall1.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall1Test1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  
+
+  <target name="c6e">
+    <csc target="exe" output="${dist}/Warshall1Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall1.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall1Test2.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c6f">
+    <csc target="exe" output="${dist}/Warshall2Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall2.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall2Test1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c6g">
+    <csc target="exe" output="${dist}/Warshall2Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall2.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall2Test2.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+
+  <target name="c6h">
+    <!-- Not ported yet?
+    <csc target="exe" output="${dist}/Warshall2TestTime1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall2.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall2TestTime1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+    -->
+  </target>
+
+  <target name="c6i">
+    <!-- Not ported yet?
+    <csc target="exe" output="${dist}/Warshall2TestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall2.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall2TestTime2.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+    -->
+  </target>
+  <target name="c6j">
+    <!-- Not ported yet?
+    <csc target="exe" output="${dist}/Warshall1TestTime1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter06/**/Warshall1.cs"/>
+        <include name="src/**/textbook/chapter06/**/Warshall1TestTime1.cs"/>
+      </sources>
+      <references>
+        <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+    -->
+  </target>
+  -->
+  
+  <target name="c6" depends="c6a,c6b,c6c,c6d,c6e,c6f,c6g,c6h,c6i,c6j"/>
+  
+  <!-- Chaper 7 Examples -->
+
+  <target name="c7a" depends="thread">
+    <csc target="exe" output="${dist}/TestVadd1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/TestVadd1.cs"/>
+        <include name="src/**/textbook/chapter07/DFFuture1.cs"/>
+        <include name="src/**/textbook/chapter07/Binop1.cs"/>
+        <include name="src/**/textbook/chapter07/Op1.cs"/>
+        <include name="src/**/textbook/chapter07/Op2.cs"/>
+        <include name="src/**/textbook/chapter07/Vadd.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7b" depends="thread">
+    <csc target="exe" output="${dist}/TestVadd2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/TestVadd2.cs"/>
+        <include name="src/**/textbook/chapter07/DFFuture1.cs"/>
+        <include name="src/**/textbook/chapter07/Binop2.cs"/>
+        <include name="src/**/textbook/chapter07/Op1.cs"/>
+        <include name="src/**/textbook/chapter07/Op2.cs"/>
+        <include name="src/**/textbook/chapter07/Vadd.cs"/>
+        <include name="src/**/textbook/chapter07/Fetch.cs"/>
+        <include name="src/**/textbook/chapter07/StoreOp.cs"/>
+        <include name="src/**/textbook/chapter07/Store.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7c" depends="thread">
+    <csc target="exe" output="${dist}/TestVadd3.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/TestVadd3.cs"/>
+        <include name="src/**/textbook/chapter07/DFFuture1.cs"/>
+        <include name="src/**/textbook/chapter07/Vadd.cs"/>
+        <include name="src/**/textbook/chapter07/Op1.cs"/>
+        <include name="src/**/textbook/chapter07/Op2.cs"/>
+        <include name="src/**/textbook/chapter07/Fetch2nd.cs"/>
+        <include name="src/**/textbook/chapter07/Fetch.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7d" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC1Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC1.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC1Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7e" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC1Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC1.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC1Test2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7f" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC1TestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC1.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC1TestTime2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <!-- These examples have not been ported yet.
+
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC2Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC2.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC2Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC2Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC2.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC2Test2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC2TestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC2.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC2TestTime2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC3Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC3.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC3Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WashallC3Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC3.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC3Test2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC3TestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC3.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC3TestTime2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC4Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC4.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC4Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC4Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC4.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC4Test2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallC4TestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallC4.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallC4TestTime2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallDFTest1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallDF1.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallDF1Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c7-<example>" depends="thread">
+    <csc target="exe" output="${dist}/WarshallDF1Test2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter07/WarshallDF1.cs"/>
+        <include name="src/**/textbook/chapter07/WarshallDF1Test2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  --> 
+
+  <target name="c7" depends="c7a,c7b,c7c,c7d,c7e,c7f"/>
+    
+  <target name="c8a" depends="thread">
+    <csc target="exe" output="${dist}/ParQuickSort2Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter08/ParQuickSort2.cs"/>
+        <include name="src/**/textbook/chapter08/ParQuickSort2Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c8b" depends="thread">
+    <csc target="exe" output="${dist}/ParQuickSort2TestTime1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter08/ParQuickSort2.cs"/>
+        <include name="src/**/textbook/chapter08/ParQuickSort2TestTime1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c8c" depends="thread">
+    <csc target="exe" output="${dist}/ShellSort6Test1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter08/ShellSort6.cs"/>
+        <include name="src/**/textbook/chapter08/ShellSort6Test1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c8d" depends="thread">
+    <csc target="exe" output="${dist}/ShellSort6TestTime1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter08/ShellSort6.cs"/>
+        <include name="src/**/textbook/chapter08/ShellSort6TestTime1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  
+  <target name="c8" depends="c8a,c8b,c8c,c8d"/>
+  
+  <target name="c9a" depends="thread">
+    <csc target="exe" output="${dist}/BarrierTQ.exe">
+      <sources>
+        <include name="src/**/textbook/chapter09/BarrierTQ.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c9b" depends="thread">
+    <csc target="exe" output="${dist}/BBuffer.exe">
+      <sources>
+        <include name="src/**/textbook/chapter09/BBuffer.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c9c" depends="thread">
+    <csc target="exe" output="${dist}/WarshallTQTest1.exe">
+      <sources>
+        <include name="src/**/textbook/chapter09/WarshallTQ.cs"/>
+        <include name="src/**/textbook/chapter09/WarshallTQTest1.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c9d" depends="thread">
+    <csc target="exe" output="${dist}/WarshallTQTest2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter09/WarshallTQ.cs"/>
+        <include name="src/**/textbook/chapter09/WarshallTQTest2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+  <target name="c9e" depends="thread">
+    <csc target="exe" output="${dist}/WarshallTQTestTime2.exe">
+      <sources>
+        <include name="src/**/textbook/chapter09/WarshallTQ.cs"/>
+        <include name="src/**/textbook/chapter09/WarshallTQTestTime2.cs"/>
+      </sources>
+      <references>
+          <include name="${dist}/thread.dll"/>
+      </references>
+    </csc>
+  </target>
+
+  <target name="c9" depends="c9a,c9b,c9c,c9d,c9e"/>
+
+</project>
